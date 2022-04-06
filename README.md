@@ -5,19 +5,9 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Run tests
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm run test:unit
 ```
 
 ### Customize configuration
