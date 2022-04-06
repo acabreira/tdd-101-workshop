@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
-    <input v-model="state.username" data-test-id="username" />
-    <input v-model="state.password" data-test-id="password" type="password" />
+  <div className="container">
+    <input v-model="state.username" data-test-id="username"/>
+    <input v-model="state.password" data-test-id="password" type="password"/>
 
-    <login-button data-test-id="login_button" @login="login" />
-    <p class="error" data-test-id="error_message" v-if="state.error">{{ state.error }}</p>
+    <login-button data-test-id="login_button" @login="login"/>
+    <p className="error" data-test-id="error_message" v-if="state.error">{{ state.error }}</p>
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
+import {reactive} from 'vue'
 import LoginButton from './login-button'
 import validateUserAPI from '@/composables/validateUserAPI';
 import router from '@/composables/router'
@@ -53,6 +53,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .error {
   color: red;
 }

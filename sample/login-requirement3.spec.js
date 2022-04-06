@@ -3,7 +3,7 @@ import Component from '../../src/components/login-component'
 import router  from '@/composables/router'
 import validateUserAPI from "@/composables/validateUserAPI";
 
-// jest.mock('@/composables/router')
+jest.mock('@/composables/router')
 jest.mock('@/composables/validateUserAPI', () => ({
     __esModule: true,
     default: jest.fn(() => ({
@@ -71,23 +71,14 @@ describe("[component] login", () => {
 
     test('Submit empty credentials displays an error', async () => {
 
-        validateUserAPI.mockImplementation(() => ({
-            success: false,
-            msg: 'Incorrect username and password'
-        }))
-
-        wrapper.find('[data-test-id="username"]').setValue('Admin');
-        wrapper.find('[data-test-id="password"]').setValue('wrong password');
-
-        await wrapper.find('[data-test-id="login_button"]').trigger('click');
-
-        expect(wrapper.find('[data-test-id="error_message"]').exists()).toBeTruthy();
-        expect(wrapper.find('[data-test-id="error_message"]').text()).toEqual('Incorrect username and password');
-
     });
 
     test('Admin login redirects to /adminHomepage', async () => {
 
+        validateUserAPI.mockImplementation(() => ({
+            success: true,
+            permission: 'Admin'
+        }))
         const spy = jest.spyOn(wrapper.vm, 'login')
         await wrapper.vm.$forceUpdate()
 
@@ -100,10 +91,10 @@ describe("[component] login", () => {
         expect(validateUserAPI).toHaveBeenCalled();
 
         expect(router).toHaveBeenCalledWith('/adminHomepage');
-
     });
 
-    test('Employee login redirects to /homepage', () => {
+    test('Employee login redirects to /homepage', async () => {
+
 
     });
 });
