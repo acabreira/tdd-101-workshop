@@ -2,17 +2,15 @@
   <div class="container">
     <input v-model="state.username" data-test-id="username" />
     <input v-model="state.password" data-test-id="password" type="password" />
-    <a data-test-id="forgot_password_link" href="#index" @click="toggleModal"> Forgot password? </a>
+
     <login-button data-test-id="login_button" @login="login" />
     <p class="error" data-test-id="error_message" v-if="state.error">{{ state.error }}</p>
-    <div v-if="state.showModal"></div>
   </div>
 </template>
 <script>
 import { reactive } from 'vue'
 import LoginButton from './login-button'
 import validateUserAPI from '@/composables/validateUserAPI';
-import router from '@/composables/router'
 
 export default {
   name: 'login-component',
@@ -32,7 +30,6 @@ export default {
         state.error = result.msg
       } else {
         state.error = ''
-        router(result.permission === 'Admin' ? '/adminHomepage' : '/homepage')
       }
     }
 

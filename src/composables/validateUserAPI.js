@@ -20,7 +20,6 @@ const findUser = (username) => {
 export default async function (username, password) {
     let result;
     const user = findUser(username)
-
     if (!username || !password) {
         result = {
             success: false,
@@ -29,7 +28,7 @@ export default async function (username, password) {
     } else if (!user) {
         result = {
             success: false,
-            msg: 'Unable to find user',
+            msg: 'Unable to find a username with that name',
         }
     } else if (user.password !== password) {
         result = {
@@ -38,12 +37,14 @@ export default async function (username, password) {
         }
     } else {
         result = {
-            success: true
+            success: true,
+            permission: user.permissions
         }
     }
 
     return new Promise(resolve =>
         setTimeout(() => {
+            console.log('Resolving promise')
             resolve(result)
         }, 500))
 }

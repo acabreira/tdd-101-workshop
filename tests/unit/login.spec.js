@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import Component from "../../src/components/login-component";
+import Component from "../../src/components/login-component-sample";
 
 describe("[component] login", () => {
   let wrapper;
@@ -23,7 +23,7 @@ describe("[component] login", () => {
     expect(wrapper.find("button[data-test-id=login_button]").isVisible()).toBe(true);
   });
 
-  test('Clicking login button emits a login event', async () => {
+  test('Login button calls the login function', async () => {
 
     const spy = jest.spyOn(wrapper.vm, 'login');
     await wrapper.vm.$forceUpdate()
@@ -32,9 +32,4 @@ describe("[component] login", () => {
 
     expect(spy).toHaveBeenCalled();
   })
-
-  test.skip('Clicking login button with credentials dont match displays an error', () => {})
-  test.skip('Clicking login button with empty credentials displays an error', () => {})
-  test.skip('Clicking login button with valid credentials displays a success message', () => {})
-  test.skip('Clicking Forgot Password link opens a modal', () => {})
 });

@@ -2,10 +2,9 @@
   <div class="container">
     <input v-model="state.username" data-test-id="username" />
     <input v-model="state.password" data-test-id="password" type="password" />
-    <a data-test-id="forgot_password_link" href="#index" @click="toggleModal"> Forgot password? </a>
+
     <login-button data-test-id="login_button" @login="login" />
     <p class="error" data-test-id="error_message" v-if="state.error">{{ state.error }}</p>
-    <div v-if="state.showModal"></div>
   </div>
 </template>
 <script>

@@ -31,6 +31,7 @@ export default {
       if (!result.success) {
         state.error = result.msg
       } else {
+        console.log("THIS IS IT")
         state.error = ''
         router(result.permission === 'Admin' ? '/adminHomepage' : '/homepage')
       }
