@@ -15,3 +15,19 @@ export default {
   }
 }
 </script>
+<style scoped>
+button {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #3D1CBA;
+  border: none;
+  color: white;
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+</style>

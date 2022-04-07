@@ -11,15 +11,12 @@ const users = [
     }
 ]
 
-const findUser = (username) => {
-    return users.find(user => {
-        return user.username === username
-    })
-}
-
 export default async function (username, password) {
     let result;
-    const user = findUser(username)
+    const user = users.find(user => {
+        return user.username === username
+    })
+
     if (!username || !password) {
         result = {
             success: false,
@@ -44,7 +41,6 @@ export default async function (username, password) {
 
     return new Promise(resolve =>
         setTimeout(() => {
-            console.log('Resolving promise')
             resolve(result)
         }, 500))
 }
