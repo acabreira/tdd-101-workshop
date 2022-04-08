@@ -1,10 +1,26 @@
 <template>
-  <button @click="login">Login</button>
+  <button
+      :class="{
+        'disabled-button': disabled,
+        'active-button': !disabled,
+        'button': true,
+      }"
+    :disabled="disabled"
+    @click="login"
+  >
+    Login
+  </button>
 </template>
 <script>
 export default {
   name: 'login-button',
   emits: ['login'],
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup(props, {emit}) {
     function login() {
       emit('login')
@@ -16,18 +32,27 @@ export default {
 }
 </script>
 <style scoped>
-button {
-  padding: 10px;
-  border-radius: 10px;
+.active-button {
   background-color: #3D1CBA;
+  cursor: pointer;
+}
+
+.active-button:hover {
+  opacity: 0.8;
+}
+
+.disabled-button {
+  background-color: grey;
+  opacity: 0.5;
+}
+
+.button {
+  border-radius: 10px;
   border: none;
   color: white;
   font-weight: 900;
   font-size: 16px;
-  cursor: pointer;
+  padding: 10px;
 }
 
-button:hover {
-  opacity: 0.9;
-}
 </style>

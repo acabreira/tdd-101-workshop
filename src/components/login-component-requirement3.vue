@@ -1,17 +1,21 @@
 <template>
   <div className="container">
     <p>Username:</p>
-    <input v-model="state.username" data-test-id="username"/>
+    <input @input="handleInputChange" v-model="state.username" data-test-id="username"/>
     <p>Password:</p>
-    <input v-model="state.password" data-test-id="password" type="password"/>
+    <input @input="handleInputChange" v-model="state.password" data-test-id="password" type="password"/>
 
-    <login-button data-test-id="login_button" @login="login"/>
+    <login-button
+        :disabled="state.password.length < 8 || state.username.length < 5"
+        data-test-id="login_button"
+        @login="login"
+    />
     <p class="error" data-test-id="error_message" v-if="state.error">{{ state.error }}</p>
     <p class="success" data-test-id="success_message" v-if="state.success">Logged in successfully</p>
   </div>
 </template>
 <script>
-import {reactive} from 'vue'
+import { reactive } from 'vue'
 import LoginButton from './login-button'
 import validateUserAPI from '@/composables/validateUserAPI';
 import router from '@/composables/router'
@@ -45,10 +49,16 @@ export default {
       state.showModal = !state.showModal
     }
 
+    function handleInputChange() {
+      state.error = ''
+      state.success = false
+    }
+
     return {
       state,
       login,
-      toggleModal
+      toggleModal,
+      handleInputChange
     }
   }
 }
