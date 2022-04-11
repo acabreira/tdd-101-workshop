@@ -1,21 +1,24 @@
-import { mount } from "@vue/test-utils";
-import Component from "../../src/components/login-component";
+import { mount } from '@vue/test-utils';
+import Component from '../../src/components/login-component';
 
-describe("[component] login", () => {
+describe('[component] login', () => {
   let wrapper;
 
-  beforeEach( () => {
+  beforeEach(() => {
     wrapper = mount(Component);
   });
 
-  test("Login elements are visible", () => {
-    expect(wrapper.find("input[data-test-id=username]").isVisible()).toBe(true);
-    expect(wrapper.find("input[data-test-id=password]").isVisible()).toBe(true);
-    expect(wrapper.find("button[data-test-id=login_button]").isVisible()).toBe(true);
-  });
+  test('Login elements are visible', () => {
 
-  test('Username and password inputs are empty', () => {
+    expect(wrapper.find('input[data-test-id=username]').isVisible()).toBe(true);
+
+    //Add verification for other elements: password and login button should be visible
 
   });
+
+  //Based on requirement 1, we are still missing a test
+
+
 
 });
+

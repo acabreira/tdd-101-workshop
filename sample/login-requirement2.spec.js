@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Component from '@/components/login-component'
-import validateUserAPI from "@/composables/validateUserAPI";
+import validateUserAPI from '@/composables/validateUserAPI';
 
 jest.mock('@/composables/router')
 jest.mock('@/composables/validateUserAPI', () => ({
@@ -11,7 +11,7 @@ jest.mock('@/composables/validateUserAPI', () => ({
     })),
 }))
 
-describe("[component] login", () => {
+describe('[component] login', () => {
     let wrapper;
 
     beforeEach(() => {
@@ -19,57 +19,30 @@ describe("[component] login", () => {
         wrapper = mount(Component);
     });
 
-    test("Login elements are visible", () => {
-        expect(wrapper.find("input[data-test-id=username]").isVisible()).toBe(true);
-        expect(wrapper.find("input[data-test-id=password]").isVisible()).toBe(true);
-        expect(wrapper.find("button[data-test-id=login_button]").isVisible()).toBe(true);
+    test('Login elements are visible', () => {
+        expect(wrapper.find('input[data-test-id=username]').isVisible()).toBe(true);
+        //Add verification for other elements: password and login button should be visible
     });
 
-    test('Username and password inputs are empty', () => {
-        expect(wrapper.find("input[data-test-id=username]").text()).toEqual('');
-        expect(wrapper.find("input[data-test-id=password]").text()).toEqual('');
-    });
+    //Based on requirement 1, we are still missing a test
 
-    test('Submit credentials that dont match displays an error', async () => {
+    test('Submitting incorrect credentials displays an error', async () => {
 
         validateUserAPI.mockImplementation(() => ({
             success: false,
             msg: 'Incorrect username and password'
         }))
 
-        wrapper.find('[data-test-id="username"]').setValue('Admin');
-        wrapper.find('[data-test-id="password"]').setValue('wrong password');
+        wrapper.find('[data-test-id=username]').setValue('Admin');
+        //insert incorrect password value here
 
-        await wrapper.find('[data-test-id="login_button"]').trigger('click');
+        //insert click button here
 
-        expect(wrapper.find('[data-test-id="error_message"]').exists()).toBeTruthy();
-        expect(wrapper.find('[data-test-id="error_message"]').text()).toEqual('Incorrect username and password');
-
-    });
-
-    test('Submit empty credentials displays an error', async () => {
+        expect(wrapper.find('[data-test-id=error_message]').exists()).toBeTruthy();
+        expect(wrapper.find('[data-test-id=error_message]').text()).toEqual('Incorrect username and password');
 
     });
 
-    test('Submit credentials that dont match displays an error', async () => {
-
-        validateUserAPI.mockImplementation(() => ({
-            success: false,
-            msg: 'Incorrect username and password'
-        }))
-
-        wrapper.find('[data-test-id="username"]').setValue('Admin');
-        wrapper.find('[data-test-id="password"]').setValue('wrong password');
-
-        await wrapper.find('[data-test-id="login_button"]').trigger('click');
-
-        expect(wrapper.find('[data-test-id="error_message"]').exists()).toBeTruthy();
-        expect(wrapper.find('[data-test-id="error_message"]').text()).toEqual('Incorrect username and password');
-
-    });
-
-    test('Submit empty credentials displays an error', async () => {
-
-    });
+    //Based on requirement 2, what other tests can we write to fulfill the requirement?
 });
 

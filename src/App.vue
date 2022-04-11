@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import LoginComponent from './components/login-component-requirement3'
+import LoginComponent from './components/login-component'
 
 export default {
   name: 'App',
